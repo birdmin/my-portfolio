@@ -60,6 +60,9 @@
             padding: 15px;
             border-radius: 8px;
             font-size: 0.9rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
         h3 {
             font-size: 1.05rem;
@@ -78,12 +81,14 @@
             color: #ffffff;
             border: 2px solid #0056b3;
             padding: 8px 14px;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: bold;
             border-radius: 6px;
             cursor: pointer;
             margin-top: 10px;
             transition: background-color 0.2s ease;
+            width: 100%;
+            text-align: center;
         }
         .toggle-btn:hover {
             background-color: #003d80;
@@ -145,43 +150,72 @@
     <main>
         <h2>주요 활동 및 역량</h2>
         <div class="grid">
+            <!-- 1번 카드 -->
             <article class="card">
-                <h3>1. 웹 보안 취약점 진단</h3>
-                <p><strong>상황:</strong> 웹 보안 원리를 익히기 위한 모의해킹 환경 필요</p>
-                <p><strong>행동:</strong> WebHackLab 구축 및 OWASP Top 10 취약점 진단 수행</p>
-                <p><strong>결과:</strong> 주요 취약점 원인 분석 및 대응 방안 정리</p>
-                
-                <!-- 상호작용 버튼 -->
-                <button type="button" class="toggle-btn" id="first-focusable" aria-expanded="false" aria-controls="detail-1" onclick="toggleDetail('detail-1', this)">
-                    상세 진단 항목 보기 ▼
-                </button>
-                <div id="detail-1" class="details-content">
-                    <p>• SQL Injection (인증 우회, 데이터 추출)</p>
-                    <p>• Cross-Site Scripting (XSS)</p>
-                    <p>• IDOR (부적절한 인가/접근 제어)</p>
-                    <p>• Command Injection</p>
+                <div>
+                    <h3>1. 웹 보안 취약점 진단</h3>
+                    <p><strong>상황:</strong> 웹 보안 원리를 익히기 위한 모의해킹 환경 필요</p>
+                    <p><strong>행동:</strong> WebHackLab 구축 및 OWASP Top 10 취약점 진단 수행</p>
+                    <p><strong>결과:</strong> 주요 취약점 원인 분석 및 대응 방안 정리</p>
+                </div>
+                <div>
+                    <button type="button" class="toggle-btn focusable" aria-expanded="false" aria-controls="detail-1" onclick="toggleDetail('detail-1', this)">
+                        상세 진단 항목 보기 ▼
+                    </button>
+                    <div id="detail-1" class="details-content">
+                        <p>• SQL Injection (인증 우회, 데이터 추출)</p>
+                        <p>• Cross-Site Scripting (XSS)</p>
+                        <p>• IDOR (부적절한 인가/접근 제어)</p>
+                        <p>• Command Injection</p>
+                    </div>
                 </div>
             </article>
 
+            <!-- 2번 카드 -->
             <article class="card">
-                <h3>2. 네트워크 및 CS 역량</h3>
-                <p><strong>상황:</strong> 체계적인 보안 학습을 위한 기본 지식 필요</p>
-                <p><strong>행동:</strong> 네트워크 보안 프로토콜 및 CS 핵심 지식 학습</p>
-                <p><strong>결과:</strong> 기초 CS 지식과 기술 트렌드 학습 체계 구축</p>
+                <div>
+                    <h3>2. 네트워크 및 CS 역량</h3>
+                    <p><strong>상황:</strong> 웹 애플리케이션 통신 과정에서의 패킷 및 보안 프로토콜 이해 필요</p>
+                    <p><strong>행동:</strong> 네트워크 패킷 분석 및 CS 핵심 지식 학습</p>
+                    <p><strong>결과:</strong> 클라이언트-서버 간 데이터 흐름 및 보안 위협 파악 역량 확보</p>
+                </div>
+                <div>
+                    <button type="button" class="toggle-btn focusable" aria-expanded="false" aria-controls="detail-2" onclick="toggleDetail('detail-2', this)">
+                        학습 세부 내용 보기 ▼
+                    </button>
+                    <div id="detail-2" class="details-content">
+                        <p>• HTTP/HTTPS 프로토콜 동작 원리 분석</p>
+                        <p>• Wireshark 활용 트래픽 패킷 분석</p>
+                        <p>• TCP/IP 4계층 및 기본 메모리 구조 이해</p>
+                    </div>
+                </div>
             </article>
 
+            <!-- 3번 카드 -->
             <article class="card">
-                <h3>3. 디버깅 및 문제 해결</h3>
-                <p><strong>상황:</strong> 실습 중 발생한 다양한 시스템 설정 및 로직 에러</p>
-                <p><strong>행동:</strong> Server 및 DB 환경 로그 추적 및 코드 수정</p>
-                <p><strong>결과:</strong> 시스템 원리 이해 및 스스로 에러 해결 역량 확보</p>
+                <div>
+                    <h3>3. 디버깅 및 문제 해결</h3>
+                    <p><strong>상황:</strong> WebHackLab 구축 과정에서 발생한 복잡한 설정 및 코드 에러</p>
+                    <p><strong>행동:</strong> 바이브 코딩(AI 활용)으로 원인을 파악하고 서버 로그 추적 후 수정</p>
+                    <p><strong>결과:</strong> 시스템 오류의 신속한 해결 및 웹 구성 알고리즘 원리 습득</p>
+                </div>
+                <div>
+                    <button type="button" class="toggle-btn focusable" aria-expanded="false" aria-controls="detail-3" onclick="toggleDetail('detail-3', this)">
+                        해결 사례 보기 ▼
+                    </button>
+                    <div id="detail-3" class="details-content">
+                        <p>• AI 프롬프트 기반 코드 에러 원인 즉시 분석</p>
+                        <p>• DB 커넥션 및 웹 서버 설정 디버깅</p>
+                        <p>• 실시간 오류 수정을 통한 문제 해결 역량 확보</p>
+                    </div>
+                </div>
             </article>
         </div>
 
         <h2>공개 근거</h2>
         <div class="evidence-box">
             📄 <strong>실습 보고서:</strong> 
-            <a href="https://github.com/birdmin/my-portfolio/blob/main/WebHackLab_%EB%B3%B4%EC%95%88%EC%B7%A8%EC%95%BD%EC%A0%90_%EC%A0%90%EA%B2%80%EB%B3%B4%EA%B3%A0%EC%84%9C.docx" target="_blank" rel="noopener noreferrer" id="last-focusable">
+            <a href="https://github.com/birdmin/my-portfolio/blob/main/WebHackLab_%EB%B3%B4%EC%95%88%EC%B7%A8%EC%95%BD%EC%A0%90_%EC%A0%90%EA%B2%80%EB%B3%B4%EA%B3%A0%EC%84%9C.docx" target="_blank" rel="noopener noreferrer" class="focusable">
                 WebHackLab 웹 애플리케이션 보안 취약점 점검 보고서 (SQLi, XSS, IDOR, Command Injection 진단 기록)
             </a>
         </div>
@@ -194,40 +228,46 @@
         const content = document.getElementById(id);
         const isExpanded = btn.getAttribute('aria-expanded') === 'true';
         
+        const defaultText = btn.innerText.replace('접기 ▲', '보기 ▼');
+        const activeText = btn.innerText.replace('보기 ▼', '접기 ▲');
+
         if (isExpanded) {
             content.classList.remove('active');
             btn.setAttribute('aria-expanded', 'false');
-            btn.innerText = '상세 진단 항목 보기 ▼';
+            btn.innerText = defaultText;
         } else {
             content.classList.add('active');
             btn.setAttribute('aria-expanded', 'true');
-            btn.innerText = '상세 진단 항목 접기 ▲';
+            btn.innerText = activeText;
         }
     }
 
-    // 포커스 가두기(Focus Trap) 로직 - 윈도우/문서 전체에서 탭 키를 가둠
+    // 포커스 가두기(Focus Trap) - 화면 내 포커스 가능 요소들 사이만 무한 순환
     window.addEventListener('keydown', function(e) {
         if (e.key === 'Tab') {
-            const firstEl = document.getElementById('first-focusable');
-            const lastEl = document.getElementById('last-focusable');
+            const focusables = Array.from(document.querySelectorAll('.focusable'));
+            if (focusables.length === 0) return;
+
+            const firstEl = focusables[0];
+            const lastEl = focusables[focusables.length - 1];
             const activeEl = document.activeElement;
 
             // Shift + Tab 누를 때
             if (e.shiftKey) {
-                if (activeEl === firstEl || !activeEl || activeEl === document.body) {
+                if (activeEl === firstEl || !focusables.includes(activeEl)) {
                     e.preventDefault();
                     lastEl.focus();
                 }
             } 
             // 일반 Tab 누를 때
             else {
-                if (activeEl === lastEl || !activeEl || activeEl === document.body) {
+                if (activeEl === lastEl || !focusables.includes(activeEl)) {
                     e.preventDefault();
                     firstEl.focus();
                 }
             }
         }
-    }, true); // capturing 단계를 사용하여 모든 탭 이벤트를 최우선으로 가로챔
+    }, true);
 </script>
 
 </body>
