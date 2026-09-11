@@ -13,7 +13,7 @@
         body {
             font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
             line-height: 1.5;
-            color: #333;
+            color: #212529; /* 글자 명암비 강화 */
             background-color: #f8f9fa;
             display: flex;
             justify-content: center;
@@ -28,7 +28,7 @@
             padding: 30px 40px;
             border-radius: 12px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            overflow: hidden; /* 가로 넘침 방지 */
+            overflow: hidden;
         }
         header {
             border-bottom: 2px solid #0056b3;
@@ -37,15 +37,15 @@
         }
         h1 {
             font-size: 1.8rem;
-            color: #111;
+            color: #111111;
             margin-bottom: 5px;
         }
         .intro {
             font-size: 1rem;
-            color: #555;
+            color: #495057;
         }
-        .section-title {
-            font-size: 1.2rem;
+        h2 {
+            font-size: 1.3rem;
             color: #0056b3;
             margin-bottom: 12px;
         }
@@ -61,10 +61,13 @@
             border-radius: 8px;
             font-size: 0.9rem;
         }
-        .card h3 {
-            font-size: 1rem;
+        h3 {
+            font-size: 1.05rem;
             margin-bottom: 6px;
-            color: #222;
+            color: #111111;
+        }
+        .card p {
+            color: #343a40;
         }
         .evidence-box {
             background: #e7f5ff;
@@ -73,8 +76,13 @@
             border-radius: 4px;
             font-size: 0.95rem;
         }
+        /* Tab 키 이동 시 아웃라인 표시 (키보드 접근성 결함 해결) */
+        a:focus-visible {
+            outline: 3px solid #0056b3;
+            outline-offset: 2px;
+        }
         .evidence-box a {
-            color: #1c7ed6;
+            color: #0b7285;
             font-weight: bold;
             text-decoration: underline;
         }
@@ -89,31 +97,34 @@
     </header>
 
     <main>
-        <h2 class="section-title">주요 활동 및 역량</h2>
+        <h2>주요 활동 및 역량</h2>
         <div class="grid">
-            <div class="card">
+            <article class="card">
                 <h3>1. 웹 보안 취약점 진단</h3>
                 <p><strong>상황:</strong> 웹 보안 원리를 익히기 위한 모의해킹 환경 필요</p>
                 <p><strong>행동:</strong> WebHackLab 구축 및 OWASP Top 10 취약점 진단 수행</p>
                 <p><strong>결과:</strong> 주요 취약점 원인 분석 및 대응 방안 정리</p>
-            </div>
-            <div class="card">
+            </article>
+            <article class="card">
                 <h3>2. 네트워크 및 CS 역량</h3>
                 <p><strong>상황:</strong> 체계적인 보안 학습을 위한 기본 지식 필요</p>
                 <p><strong>행동:</strong> 네트워크 보안 프로토콜 및 CS 핵심 지식 학습</p>
                 <p><strong>결과:</strong> 기초 CS 지식과 기술 트렌드 학습 체계 구축</p>
-            </div>
-            <div class="card">
+            </article>
+            <article class="card">
                 <h3>3. 디버깅 및 문제 해결</h3>
                 <p><strong>상황:</strong> 실습 중 발생한 다양한 시스템 설정 및 로직 에러</p>
                 <p><strong>행동:</strong> Server 및 DB 환경 로그 추적 및 코드 수정</p>
                 <p><strong>결과:</strong> 시스템 원리 이해 및 스스로 에러 해결 역량 확보</p>
-            </div>
+            </article>
         </div>
 
-        <h2 class="section-title">공개 근거</h2>
+        <h2>공개 근거</h2>
         <div class="evidence-box">
-            📄 <strong>실습 보고서:</strong> WebHackLab 웹 애플리케이션 보안 취약점 점검 보고서 (SQLi, XSS, IDOR, Command Injection 진단 기록)
+            📄 <strong>실습 보고서:</strong> 
+            <a href="https://github.com/birdmin/my-portfolio" target="_blank" rel="noopener noreferrer">
+                WebHackLab 웹 애플리케이션 보안 취약점 점검 보고서 (SQLi, XSS, IDOR, Command Injection 진단 기록)
+            </a>
         </div>
     </main>
 </div>
