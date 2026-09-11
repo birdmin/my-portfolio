@@ -109,12 +109,12 @@
             font-size: 0.95rem;
         }
         
-        /* 키보드 Tab 이동 시 초점 아웃라인 강조 표시 */
+        /* 키보드 Tab 이동 시 초점 아웃라인 강렬하게 강조 */
         a:focus, a:focus-visible,
         button:focus, button:focus-visible {
             outline: 3px solid #d9480f !important;
             outline-offset: 3px !important;
-            box-shadow: 0 0 0 4px rgba(217, 72, 15, 0.3);
+            box-shadow: 0 0 0 4px rgba(217, 72, 15, 0.3) !important;
         }
 
         .evidence-box a {
@@ -136,7 +136,7 @@
 </head>
 <body>
 
-<div class="container" id="app-container">
+<div class="container">
     <header>
         <h1>김경민 (2005년생 / 컴퓨터공학과)</h1>
         <p class="intro">보안전문가로서 성장하는 중인 대학생 김경민의 소개 페이지입니다.</p>
@@ -152,7 +152,7 @@
                 <p><strong>결과:</strong> 주요 취약점 원인 분석 및 대응 방안 정리</p>
                 
                 <!-- 상호작용 버튼 -->
-                <button type="button" class="toggle-btn" tabindex="0" aria-expanded="false" aria-controls="detail-1" onclick="toggleDetail('detail-1', this)">
+                <button type="button" class="toggle-btn" id="first-focusable" aria-expanded="false" aria-controls="detail-1" onclick="toggleDetail('detail-1', this)">
                     상세 진단 항목 보기 ▼
                 </button>
                 <div id="detail-1" class="details-content">
@@ -181,7 +181,7 @@
         <h2>공개 근거</h2>
         <div class="evidence-box">
             📄 <strong>실습 보고서:</strong> 
-            <a href="https://github.com/birdmin/my-portfolio/blob/main/WebHackLab_%EB%B3%B4%EC%95%88%EC%B7%A8%EC%95%BD%EC%A0%90_%EC%A0%90%EA%B2%80%EB%B3%B4%EA%B3%A0%EC%84%9C.docx" target="_blank" rel="noopener noreferrer" tabindex="0">
+            <a href="https://github.com/birdmin/my-portfolio/blob/main/WebHackLab_%EB%B3%B4%EC%95%88%EC%B7%A8%EC%95%BD%EC%A0%90_%EC%A0%90%EA%B2%80%EB%B3%B4%EA%B3%A0%EC%84%9C.docx" target="_blank" rel="noopener noreferrer" id="last-focusable">
                 WebHackLab 웹 애플리케이션 보안 취약점 점검 보고서 (SQLi, XSS, IDOR, Command Injection 진단 기록)
             </a>
         </div>
@@ -189,7 +189,7 @@
 </div>
 
 <script>
-    // 1. 접기/펼치기 토글 함수
+    // 접기/펼치기 토글 함수
     function toggleDetail(id, btn) {
         const content = document.getElementById(id);
         const isExpanded = btn.getAttribute('aria-expanded') === 'true';
@@ -205,31 +205,29 @@
         }
     }
 
-    // 2. Tab 키 이동을 포트폴리오 화면 내부로만 가두는 스크립트 (Focus Trap)
-    document.addEventListener('keydown', function(e) {
+    // 포커스 가두기(Focus Trap) 로직 - 윈도우/문서 전체에서 탭 키를 가둠
+    window.addEventListener('keydown', function(e) {
         if (e.key === 'Tab') {
-            const focusables = Array.from(document.querySelectorAll('button, a[href], input, select, textarea, [tabindex="0"]'));
-            if (focusables.length === 0) return;
+            const firstEl = document.getElementById('first-focusable');
+            const lastEl = document.getElementById('last-focusable');
+            const activeEl = document.activeElement;
 
-            const firstElement = focusables[0];
-            const lastElement = focusables[focusables.length - 1];
-
-            // Shift + Tab 눌렀을 때 첫 번째 요소이면 마지막 요소로 이동
+            // Shift + Tab 누를 때
             if (e.shiftKey) {
-                if (document.activeElement === firstElement || !focusables.includes(document.activeElement)) {
-                    lastElement.focus();
+                if (activeEl === firstEl || !activeEl || activeEl === document.body) {
                     e.preventDefault();
+                    lastEl.focus();
                 }
             } 
-            // 일반 Tab 눌렀을 때 마지막 요소이면 첫 번째 요소로 이동
+            // 일반 Tab 누를 때
             else {
-                if (document.activeElement === lastElement || !focusables.includes(document.activeElement)) {
-                    firstElement.focus();
+                if (activeEl === lastEl || !activeEl || activeEl === document.body) {
                     e.preventDefault();
+                    firstEl.focus();
                 }
             }
         }
-    });
+    }, true); // capturing 단계를 사용하여 모든 탭 이벤트를 최우선으로 가로챔
 </script>
 
 </body>
