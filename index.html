@@ -109,10 +109,10 @@
             font-size: 0.95rem;
         }
         
-        /* ★ 핵심: 키보드 Tab 이동 시 강렬하고 명확한 초점 아웃라인 표시 ★ */
+        /* 키보드 Tab 이동 시 초점 아웃라인 강조 표시 */
         a:focus, a:focus-visible,
         button:focus, button:focus-visible {
-            outline: 3px solid #d9480f !important; /* 주황/빨강 계열로 뚜렷하게 표시 */
+            outline: 3px solid #d9480f !important;
             outline-offset: 3px !important;
             box-shadow: 0 0 0 4px rgba(217, 72, 15, 0.3);
         }
@@ -136,7 +136,7 @@
 </head>
 <body>
 
-<div class="container">
+<div class="container" id="app-container">
     <header>
         <h1>김경민 (2005년생 / 컴퓨터공학과)</h1>
         <p class="intro">보안전문가로서 성장하는 중인 대학생 김경민의 소개 페이지입니다.</p>
@@ -151,7 +151,7 @@
                 <p><strong>행동:</strong> WebHackLab 구축 및 OWASP Top 10 취약점 진단 수행</p>
                 <p><strong>결과:</strong> 주요 취약점 원인 분석 및 대응 방안 정리</p>
                 
-                <!-- Tab 키로 초점이 잡히는 버튼 -->
+                <!-- 상호작용 버튼 -->
                 <button type="button" class="toggle-btn" tabindex="0" aria-expanded="false" aria-controls="detail-1" onclick="toggleDetail('detail-1', this)">
                     상세 진단 항목 보기 ▼
                 </button>
@@ -189,6 +189,7 @@
 </div>
 
 <script>
+    // 1. 접기/펼치기 토글 함수
     function toggleDetail(id, btn) {
         const content = document.getElementById(id);
         const isExpanded = btn.getAttribute('aria-expanded') === 'true';
@@ -203,6 +204,32 @@
             btn.innerText = '상세 진단 항목 접기 ▲';
         }
     }
+
+    // 2. Tab 키 이동을 포트폴리오 화면 내부로만 가두는 스크립트 (Focus Trap)
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Tab') {
+            const focusables = Array.from(document.querySelectorAll('button, a[href], input, select, textarea, [tabindex="0"]'));
+            if (focusables.length === 0) return;
+
+            const firstElement = focusables[0];
+            const lastElement = focusables[focusables.length - 1];
+
+            // Shift + Tab 눌렀을 때 첫 번째 요소이면 마지막 요소로 이동
+            if (e.shiftKey) {
+                if (document.activeElement === firstElement || !focusables.includes(document.activeElement)) {
+                    lastElement.focus();
+                    e.preventDefault();
+                }
+            } 
+            // 일반 Tab 눌렀을 때 마지막 요소이면 첫 번째 요소로 이동
+            else {
+                if (document.activeElement === lastElement || !focusables.includes(document.activeElement)) {
+                    firstElement.focus();
+                    e.preventDefault();
+                }
+            }
+        }
+    });
 </script>
 
 </body>
